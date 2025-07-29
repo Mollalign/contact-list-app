@@ -1,7 +1,20 @@
-from flask import request, jsonify
+from flask import request, jsonify, send_from_directory
 from config import app, db
 from models import Contact
+import os
 
+# Serve React Frontend
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+# Tell Flask where the static React files are
+app.static_folder = '../frontend/dist'
+app.template_folder = "../frontend/dist"    
 
 # POST: Create contact
 @app.route("/create_contact", methods=["POST"])
@@ -70,4 +83,5 @@ def delete_contact(user_id):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(debug=False, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
