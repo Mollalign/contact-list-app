@@ -3,6 +3,10 @@ from config import app, db
 from models import Contact
 import os
 
+
+# Tell Flask where the static React files are
+app.static_folder = '../frontend/dist'
+
 # Serve React Frontend
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -11,10 +15,7 @@ def serve_react(path):
         return send_from_directory(app.static_folder, path)
     else:
         return send_from_directory(app.static_folder, 'index.html')
-
-# Tell Flask where the static React files are
-app.static_folder = '../frontend/dist'
-app.template_folder = "../frontend/dist"    
+  
 
 # POST: Create contact
 @app.route("/create_contact", methods=["POST"])
