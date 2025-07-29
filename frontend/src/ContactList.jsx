@@ -3,7 +3,7 @@ import React from "react";
 const ContactList = ({ contacts, updateContact, updateCallback }) => {
   const onDelete = async (id) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/delete_contact/${id}`, {
+      const response = await fetch(`https://contact-manager-app-c5cd.onrender.com/delete_contact/${id}`, {
         method: "DELETE",
       });
 

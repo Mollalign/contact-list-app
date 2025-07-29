@@ -12,7 +12,7 @@ function App() {
   }, []);
 
   const fetchContacts = async () => {
-    const res = await fetch("http://127.0.0.1:5000/contacts");
+    const res = await fetch("https://contact-manager-app-c5cd.onrender.com/contacts");
     const data = await res.json();
     setContacts(data.contacts);
   };

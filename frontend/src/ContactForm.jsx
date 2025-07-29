@@ -17,7 +17,7 @@ const ContactForm = ({ existingContact = {}, updateCallback }) => {
     };
 
     const url =
-      "http://127.0.0.1:5000/" +
+      "https://contact-manager-app-c5cd.onrender.com/" +
       (updating ? `update_contact/${existingContact.id}` : "create_contact");
     const options = {
       method: updating ? "PATCH" : "POST",
